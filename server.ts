@@ -23,9 +23,13 @@
  const HOST = "cluster0.m8jeh.mongodb.net";
  const DB_NAME = "myFirstDatabase";
  const DB_QUERY = "retryWrites=true&w=majority";
- const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
+ const url = "mongodb+srv://Jie:cj123456@cluster0.ozzi2.mongodb.net/tuiter?retryWrites=true&w=majority";
+ //const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
  // connect to the database
- mongoose.connect(connectionString);
+ mongoose.connect(url).then(()=>{
+     console.log("successful!");
+     
+ });
  
  const app = express();
  app.use(express.json());
