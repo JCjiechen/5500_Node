@@ -17,6 +17,8 @@
   *     </li>
   *     <li>GET /api/tuits/:tid/bookmarks to retrieve all users that bookmarked a tuit
   *     </li>
+  *     <li>Get /api/users/:uid/bookmarks/:tid to Retrieves specific tuit that is bookmarked by the user
+  *     </li>
   * </ul>
   * @property {BookmarkDao} bookmarkDao Singleton DAO implementing bookmarks CRUD operations
   * @property {BookmarkController} bookmarkController Singleton controller implementing
@@ -39,6 +41,7 @@
              app.delete("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userUnBookmarksTuit);
              app.get("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
              app.get("/api/tuits/:tid/bookmarks", BookmarkController.bookmarkController.findAllUsersThatBookmarkedTuit);
+             app.get("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.findSpecificTuitBookmarkedByUser);
          }
          return BookmarkController.bookmarkController;
      }
