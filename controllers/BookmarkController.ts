@@ -38,7 +38,7 @@
          if(BookmarkController.bookmarkController === null) {
             BookmarkController.bookmarkController = new BookmarkController();
              app.post("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userBookmarksTuit);
-             app.delete("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.userUnBookmarksTuit);
+             app.delete("/api/users/:uid/unbookmarks/:tid", BookmarkController.bookmarkController.userUnBookmarksTuit);
              app.get("/api/users/:uid/bookmarks", BookmarkController.bookmarkController.findAllTuitsBookmarkedByUser);
              app.get("/api/tuits/:tid/bookmarks", BookmarkController.bookmarkController.findAllUsersThatBookmarkedTuit);
              app.get("/api/users/:uid/bookmarks/:tid", BookmarkController.bookmarkController.findSpecificTuitBookmarkedByUser);
