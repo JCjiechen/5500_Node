@@ -42,12 +42,12 @@ import { ParsedQs } from "qs";
      public static getInstance = (app: Express): MessageController => {
         if(MessageController.messageController === null) {
             MessageController.messageController = new MessageController();
-            app.get("/api/users/:uid/messages/:auid", MessageController.messageController.createMessageByUser);
+            app.post("/api/users/:uid/messages/:auid", MessageController.messageController.createMessageByUser);
             app.get("/api/users/:uid/messagesSent", MessageController.messageController.findAllMessagesSent);
             app.get("/api/users/:uid/messagesReceived", MessageController.messageController.fingAllMessagesReceived);
-            app.post("/api/users/:uid/messages/:mid", MessageController.messageController.deleteMessage);
+            app.delete("/api/users/:uid/messages/:mid", MessageController.messageController.deleteMessage);
             app.put("/api/users/:uid/messages/:mid", MessageController.messageController.findMessageByMid);
-            app.delete("/api/users/:uid/messages/date", MessageController.messageController.findMessageByDate);
+            app.get("/api/users/:uid/messages/date", MessageController.messageController.findMessageByDate);
         }
         return MessageController.messageController;
     }
