@@ -67,9 +67,19 @@
             .populate("userFollowing")
             .exec();
 
+     /**
+      * Removes all user's following from the database.
+      * @param {string} uid User's primary key
+      * @returns Promise To be notified when all following is removed from the database
+      */
      userUnfollowAll = async (uid: string): Promise<any> =>
         FollowModel.deleteMany({userFollowing: uid});
-         
+      
+     /**
+      * Removes all user's folloer from the database.
+      * @param {string} uid User's primary key
+      * @returns Promise To be notified when all followers are removed from the database
+      */
      userDeleteAllFollower  = async (uid : string): Promise<any> =>
         FollowModel.deleteMany({userFollowed: uid});
  }

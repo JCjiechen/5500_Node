@@ -8,7 +8,7 @@
   * @property {User} userFollowed user followed
   * @property {User} userFollowing user following
   */
-export default interface Tuit {
+export default interface Follow {
     userFollowed: User,
     userFollowing: User
 };

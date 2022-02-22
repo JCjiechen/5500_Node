@@ -61,7 +61,7 @@ export default class LikeDao implements LikeDaoI {
     /**
       * Removes likes from the database.
       * @param {string} uid User's primary key
-      * @param {string} tid TUit's primary key
+      * @param {string} tid Tuit's primary key
       * @returns Promise To be notified when likes is removed from the database
       */
     userUnlikesTuit = async (uid: string, tid: string): Promise<any> =>
