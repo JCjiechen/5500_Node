@@ -34,7 +34,7 @@ export default class BookmarkDao implements BookmarkDaoI {
       * @returns Promise To be notified when bookmarked tuit is inserted into the database
       */
     userBookmarksTuit = async (uid: string, tid: string): Promise<any> =>
-        BookmarkModel.create({tuit: tid, bookmarkedBy: uid});
+        BookmarkModel.create({bookmarkedTuit: tid, bookmarkedBy: uid});
 
     /**
       * Removes bookmarks from the database.
@@ -43,7 +43,7 @@ export default class BookmarkDao implements BookmarkDaoI {
       * @returns Promise To be notified when bookmarks is removed from the database
       */
     userUnBookmarksTuit = async (uid: string, tid: string): Promise<any> =>
-        BookmarkModel.deleteOne({tuit: tid, bookmarkedBy: uid});
+        BookmarkModel.deleteOne({bookmarkedTuit: tid, bookmarkedBy: uid});
     
     /**
       * Uses BookmarkModel to retrieve all tuits that are bookmarked by the user
