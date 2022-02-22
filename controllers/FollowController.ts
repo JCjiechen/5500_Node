@@ -35,10 +35,12 @@
      public static getInstance = (app: Express): FollowController => {
          if(FollowController.followController === null) {
             FollowController.followController = new FollowController();
-             app.get("/api/users/:uid/follows/:auid", FollowController.followController.userFollow);
-             app.get("/api/users/:uid/unfollows/:auid", FollowController.followController.userUnfollow);
-             app.post("/api/users/:uid/follows", FollowController.followController.findAllFollowing);
-             app.delete("/api/users/:uid/follower", FollowController.followController.findAllFollower);
+             app.post("/api/users/:uid/follows/:auid", FollowController.followController.userFollow);
+             app.delete("/api/users/:uid/unfollows/:auid", FollowController.followController.userUnfollow);
+             app.get("/api/users/:uid/follows", FollowController.followController.findAllFollowing);
+             app.get("/api/users/:uid/follower", FollowController.followController.findAllFollower);
+             app.delete("/api/users/:uid/unfollows", FollowController.followController.userUnfollowAll);
+             app.delete("/api/users/:uid/deletefollower", FollowController.followController.userDeleteAllFollower);
          }
          return FollowController.followController;
      }
@@ -46,6 +48,7 @@
      private constructor() {}
 
      /**
+      * user follows another user
       * @param {Request} req Represents request from client, including the
       * path parameters uid and auid representing the user that is following another user
       * and the user being followed
@@ -58,6 +61,7 @@
           .then(follows => res.json(follows));
  
      /**
+      * user unfollows another user
       * @param {Request} req Represents request from client, including the
       * path parameters uid and auid representing the user that is unfollowing another user
       * and the user being unfollowed
@@ -89,4 +93,26 @@
      findAllFollower = (req: Request, res: Response) =>
         FollowController.followDao.findAllFollower(req.params.uid)
             .then(follows => res.json(follows));
+
+     /**
+      * user unfollows all the users they are following
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid representing the user
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the follows was successful or not
+      */
+     userUnfollowAll = (req: Request, res: Response) =>
+        FollowController.followDao.userUnfollowAll(req.params.uid)
+            .then(status => res.send(status));
+
+     /**
+      * user deletes all the users that are following him
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid representing the user
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the followers was successful or not
+      */
+     userDeleteAllFollower = (req: Request, res: Response) =>
+     FollowController.followDao.userDeleteAllFollower(req.params.uid)
+         .then(status => res.send(status));
  };

@@ -73,11 +73,11 @@ export default class BookmarkDao implements BookmarkDaoI {
       * @param {string} uid User's primary key
       * @returns Promise To be notified when tuit is retrieved from the database
       */
-    findSpecificTuitBookmarkedByUser = async (tid: string, uid: string): Promise<Bookmark[]> =>
+    findSpecificTuitBookmarkedByUser = async (tid: string, uid: string): Promise<any> =>
         BookmarkModel
             .find({bookmarkedBy: uid})
-            .populate("tuit")
-            .find({tuit: tid})
-            .populate("bookmarkedBy")
+            .populate("bookmarkedTuit")
+            .find({_id: tid})
+            //.populate("bookmarkedBy")
             .exec();
 }
