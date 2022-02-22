@@ -83,21 +83,9 @@
      deleteAllUsers = async (): Promise<any> =>
          UserModel.deleteMany({});
      
-    /**
-      * Uses UserModel to retrieve user document from users collection by credentials
-      * @param {string} username User's username
-      * @param {string} password User's password
-      * @returns Promise To be notified when user is retrieved from the database
-      */
      findUserByCredentials = async (username: string, password: string): Promise<any> =>
          UserModel.findOne({username: username, password: password});
      
-
-    /**
-      * Uses UserModel to retrieve user document from users collection by username
-      * @param {string} username User's username
-      * @returns Promise To be notified when user is retrieved from the database
-      */
      findUserByUsername = async (username: string): Promise<any> =>
          UserModel.findOne({username});
  };

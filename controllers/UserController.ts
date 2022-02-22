@@ -35,7 +35,7 @@
              UserController.userController = new UserController();
              
              // for testing without postman. Not RESTful
-             app.post("/api/users/create",
+             app.get("/api/users/create",
                  UserController.userController.createUser);
              app.get("/api/users/:uid/delete",
                  UserController.userController.deleteUser);

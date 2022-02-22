@@ -2,7 +2,8 @@
  * @file Declares marital status.
  * It has three types : married, single and widowed.
  */
-enum MaritalStatus {
+
+ enum MaritalStatus {
     Married = "MARRIED",
     Single = "SINGLE",
     Widowed = "WIDOWED"
