@@ -64,23 +64,10 @@
     deleteMessage = async (uid: string, mid: string): Promise<any> =>
         MessageModel.deleteOne({_id : mid});
 
-    /**
-      * Uses MessageModel to retrieve a message by the message id
-      * @param {string} mid Message's primary key
-      * @returns Promise To be notified when the message is retrieved from
-      * database
-      */
-    findMessageByMid = async (mid: string): Promise<any> =>
-        MessageModel.find({_id: mid});
+    deleteAllMessagesSent = async (uid: string): Promise<any> =>
+        MessageModel.deleteMany({from: uid});
 
-    /**
-      * Uses MessageModel to retrieve messages by the sent on date
-      * @param {string} uid User's primary key
-      * @param {Date} date the sent on date
-      * @returns Promise To be notified when the message is retrieved from
-      * database
-      */
-    findMessageByDate = async (uid: string, date : Date): Promise<Message[]> =>
-        MessageModel.find({sentOn: Date});
+    deleteAllMessagesReceived = async  (uid: string): Promise<any> =>
+        MessageModel.deleteMany({to: uid});
 
 }

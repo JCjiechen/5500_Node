@@ -9,6 +9,6 @@ export default interface MessageControllerI {
     findAllMessagesSent (req: Request, res: Response): void;
     fingAllMessagesReceived (req: Request, res: Response): void;
     deleteMessage (req: Request, res: Response): void;
-    findMessageByMid (req: Request, res: Response): void;
-    findMessageByDate (req: Request, res: Response): void;
+    deleteAllMessagesSent (req: Request, res: Response): void;
+    deleteAllMessagesReceived (req: Request, res: Response): void;
 };

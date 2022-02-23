@@ -46,8 +46,8 @@ import { ParsedQs } from "qs";
             app.get("/api/users/:uid/messagesSent", MessageController.messageController.findAllMessagesSent);
             app.get("/api/users/:uid/messagesReceived", MessageController.messageController.fingAllMessagesReceived);
             app.delete("/api/users/:uid/messages/:mid", MessageController.messageController.deleteMessage);
-            app.put("/api/users/:uid/messages/:mid", MessageController.messageController.findMessageByMid);
-            app.get("/api/users/:uid/messages/date", MessageController.messageController.findMessageByDate);
+            app.put("/api/users/:uid/messages/:mid", MessageController.messageController.deleteAllMessagesSent);
+            app.get("/api/users/:uid/messages/date", MessageController.messageController.deleteAllMessagesReceived);
         }
         return MessageController.messageController;
     }
@@ -70,11 +70,12 @@ import { ParsedQs } from "qs";
         MessageController.messageDao.deleteMessage(req.params.uid, (req.params.mid))
             .then((status) => res.send(status));
 
-    findMessageByMid = (req: Request, res: Response) =>
-        MessageController.messageDao.findMessageByMid(req.params.mid)
-            .then((message: Message) => res.json(message));
+    deleteAllMessagesSent = (req: Request, res: Response) =>
+        MessageController.messageDao.deleteAllMessagesSent(req.params.uid)
+            .then(status => res.send(status));
 
-    findMessageByDate = (req: Request, res: Response) =>
-        MessageController.messageDao.findMessageByDate(req.params.uid, req.body)
-            .then((messages: Message[]) => res.json(messages));
+    deleteAllMessagesReceived = (req: Request, res: Response) =>
+        MessageController.messageDao.deleteAllMessagesReceived(req.params.uid)
+            .then(status => res.send(status));
+
 }
