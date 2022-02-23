@@ -75,9 +75,9 @@ export default class BookmarkDao implements BookmarkDaoI {
       */
     findSpecificTuitBookmarkedByUser = async (tid: string, uid: string): Promise<any> =>
         BookmarkModel
-            .find({bookmarkedBy: uid})
+            .find({bookmarkedBy: uid, bookmarkedTuit: tid})
             .populate("bookmarkedTuit")
-            .find({_id: tid})
+            //.find({_id: tid})
             //.populate("bookmarkedBy")
             .exec();
 }
