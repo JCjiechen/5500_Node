@@ -102,5 +102,5 @@
       */
      findSpecificTuitBookmarkedByUser = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.findSpecificTuitBookmarkedByUser(req.params.uid, req.params.tid)
-             .then(bookmarks => res.json(bookmarks));
+             .then((tuit) => res.json(tuit));
  };
