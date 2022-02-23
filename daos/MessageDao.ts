@@ -64,9 +64,19 @@
     deleteMessage = async (uid: string, mid: string): Promise<any> =>
         MessageModel.deleteOne({_id : mid});
 
+    /**
+      * Deletes all messages user sent from the database.
+      * @param {string} uid User's primary key
+      * @returns Promise To be notified when message is removed from the database
+      */
     deleteAllMessagesSent = async (uid: string): Promise<any> =>
         MessageModel.deleteMany({from: uid});
 
+    /**
+      * Deletes all messages user received from the database.
+      * @param {string} uid User's primary key
+      * @returns Promise To be notified when message is removed from the database
+      */
     deleteAllMessagesReceived = async  (uid: string): Promise<any> =>
         MessageModel.deleteMany({to: uid});
 

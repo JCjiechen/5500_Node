@@ -20,9 +20,9 @@ import { ParsedQs } from "qs";
   *     </li>
   *     <li>DELETE /api/users/:uid/messages/:mid to remove a particular message instance 
   *     </li>
-  *     <li>GET /api/users/:uid/messages/:mid to retrieve a message by message id
+  *     <li>DELETE /api/users/:uid/messagesSent to deletes all messages user sent
   *     </li>
-  *     <li>GET /api/users/:uid/messages/date to retrieve messages by specific date
+  *     <li>DELETE /api/users/:uid/messagesReceived to deletes all messages they received
   *     </li>
   * </ul>
   * @property {MessageDao} messageDao Singleton DAO implementing message CRUD operations
@@ -54,26 +54,68 @@ import { ParsedQs } from "qs";
 
     private constructor() {}
     
+     /** user sends a message to another user
+      * @param {Request} req Represents request from client, including body
+      * containing the JSON object for the new message to be inserted in the
+      * database
+      * @param {Response} res Represents response to client, including the
+      * body formatted as JSON containing the new message that was inserted in the
+      * database
+      */
     createMessageByUser = (req: Request, res: Response) =>
         MessageController.messageDao.createMessageByUser(req.params.uid, req.params.auid, req.body)
             .then((message: Message) => res.json(message));
 
+     /** Retrieves all messages user sent from the database
+      * @param {Request} req Represents request from client, including the path
+      * parameter uid representing the user 
+      * @param {Response} res Represents response to client, including the
+      * body formatted as JSON arrays containing the message objects
+      */   
     findAllMessagesSent = (req: Request, res: Response) =>
         MessageController.messageDao.findAllMessagesSent(req.params.uid)
             .then((messages: Message[]) => res.json(messages));
 
+     /**
+      * Retrieves all messages user received from the database
+      * @param {Request} req Represents request from client, including the path
+      * parameter uid representing the user 
+      * @param {Response} res Represents response to client, including the
+      * body formatted as JSON arrays containing the message objects
+      */
     fingAllMessagesReceived = (req: Request, res: Response) =>
         MessageController.messageDao.findAllMessagesReceived(req.params.uid)
             .then((messages: Message[]) => res.json(messages));
 
+     /**
+      * deletes a message
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid representing the user and mid representing the message
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the messages was successful or not
+      */
     deleteMessage = (req: Request, res: Response) =>
         MessageController.messageDao.deleteMessage(req.params.uid, req.params.mid)
             .then((status) => res.send(status));
 
+     /**
+      * user deletes all message they sent
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid representing the user
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the messages was successful or not
+      */
     deleteAllMessagesSent = (req: Request, res: Response) =>
         MessageController.messageDao.deleteAllMessagesSent(req.params.uid)
             .then(status => res.send(status));
 
+     /**
+      * user deletes all message they received
+      * @param {Request} req Represents request from client, including the
+      * path parameters uid representing the user
+      * @param {Response} res Represents response to client, including status
+      * on whether deleting the messages was successful or not
+      */
     deleteAllMessagesReceived = (req: Request, res: Response) =>
         MessageController.messageDao.deleteAllMessagesReceived(req.params.uid)
             .then(status => res.send(status));

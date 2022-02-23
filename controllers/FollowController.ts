@@ -17,6 +17,10 @@
   *     </li>
   *     <li>GET /api/users/:uid/follower to retrieve all folowers of the user
   *     </li>
+  *     <li>DELETE /api/users/:uid/unfollows to unfollows all the users they are following
+  *     </li> 
+  *     <li>DELETE "/api/users/:uid/deletefollower to deletes all the followers
+  *     </li>
   * </ul>
   * @property {FollowDao} followDao Singleton DAO implementing follows CRUD operations
   * @property {FollowController} followController Singleton controller implementing
@@ -75,9 +79,9 @@
      /**
       * Retrieves all users followed by a user from the database
       * @param {Request} req Represents request from client, including the path
-      * parameter uid representing the user follows other users
+      * parameter uid representing the user 
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the user objects that were followed
+      * body formatted as JSON arrays containing the follow objects that were followed
       */
       findAllFollowing = (req: Request, res: Response) =>
         FollowController.followDao.findAllFollowing(req.params.uid)
@@ -86,9 +90,9 @@
      /**
       * Retrieves all users that follows a user from the database
       * @param {Request} req Represents request from client, including the path
-      * parameter tid representing the bookmarked tuit
+      * parameter uid representing the user
       * @param {Response} res Represents response to client, including the
-      * body formatted as JSON arrays containing the user objects
+      * body formatted as JSON arrays containing the follow objects
       */
      findAllFollower = (req: Request, res: Response) =>
         FollowController.followDao.findAllFollower(req.params.uid)

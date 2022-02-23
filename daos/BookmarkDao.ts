@@ -39,7 +39,7 @@ export default class BookmarkDao implements BookmarkDaoI {
     /**
       * Removes bookmarks from the database.
       * @param {string} uid User's primary key
-      * @param {string} tid TUit's primary key
+      * @param {string} tid Tuit's primary key
       * @returns Promise To be notified when bookmarks is removed from the database
       */
     userUnBookmarksTuit = async (uid: string, tid: string): Promise<any> =>
@@ -77,7 +77,5 @@ export default class BookmarkDao implements BookmarkDaoI {
         await BookmarkModel
             .find({bookmarkedBy: uid, bookmarkedTuit: tid})
             .populate("bookmarkedTuit")
-            //.find({_id: tid})
-            //.populate("bookmarkedBy")
             .exec();
 }
