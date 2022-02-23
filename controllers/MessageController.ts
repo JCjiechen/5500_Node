@@ -46,8 +46,8 @@ import { ParsedQs } from "qs";
             app.get("/api/users/:uid/messagesSent", MessageController.messageController.findAllMessagesSent);
             app.get("/api/users/:uid/messagesReceived", MessageController.messageController.fingAllMessagesReceived);
             app.delete("/api/users/:uid/messages/:mid", MessageController.messageController.deleteMessage);
-            app.put("/api/users/:uid/messages/:mid", MessageController.messageController.deleteAllMessagesSent);
-            app.get("/api/users/:uid/messages/date", MessageController.messageController.deleteAllMessagesReceived);
+            app.put("/api/users/:uid/ messagesSent", MessageController.messageController.deleteAllMessagesSent);
+            app.get("/api/users/:uid/messagesReceived", MessageController.messageController.deleteAllMessagesReceived);
         }
         return MessageController.messageController;
     }
