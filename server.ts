@@ -26,8 +26,13 @@ const HOST = "cluster0.ozzi2.mongodb.net";
 const DB_NAME = "tuiter";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
-// connect to the database
-mongoose.connect(connectionString);
+
+//mongoDB
+const dbUrl = "mongodb+srv://Jie:cj123456@cluster0.ozzi2.mongodb.net/tuiter?retryWrites=true&w=majority";
+mongoose.connect(dbUrl).then(() => {
+    console.log("DB is connected");
+})
+
 
 const app = express();
 app.use(express.json());
