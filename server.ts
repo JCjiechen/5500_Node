@@ -10,7 +10,7 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
@@ -31,7 +31,10 @@ const DB_NAME = "myFirstDatabase";
 const DB_QUERY = "retryWrites=true&w=majority";
 // const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
-mongoose.connect(connectionString);
+const dbUrl = "mongodb+srv://Jie:cj123456@cluster0.ozzi2.mongodb.net/tuiter?retryWrites=true&w=majority";
+mongoose.connect(dbUrl).then(() => {
+    console.log("DB is connected");
+})
 
 const app = express();
 app.use(cors({

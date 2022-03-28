@@ -1,26 +1,31 @@
-import {Request, Response, Express} from "express";
+import { Request, Response, Express } from "express";
 import UserDao from "../daos/UserDao";
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const AuthenticationController = (app: Express) => {
-    
+
     const userDao: UserDao = UserDao.getInstance();
 
     const login = async (req: Request, res: Response) => {
         const user = req.body;
         const username = user.username;
         const password = user.password;
+        console.log(username)
         console.log(password)
         const existingUser = await userDao
             .findUserByUsername(username);
         const match = await bcrypt.compare(password, existingUser.password);
+        console.log(existingUser.password)
+        console.log(match)
 
         if (match) {
             existingUser.password = '*****';
             // @ts-ignore
             req.session['profile'] = existingUser;
             res.json(existingUser);
+            // @ts-ignore
+            //console.log(req.session['profile'])
         } else {
             res.sendStatus(403);
         }
