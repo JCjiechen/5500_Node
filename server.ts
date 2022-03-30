@@ -43,19 +43,22 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-const SECRET = 'process.env.SECRET';
 let sess = {
-    secret: SECRET,
+    secret: process.env.EXPRESS_SESSION_SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+// if (process.env.ENVIRONMENT === 'PRODUCTION') {
+//     app.set('trust proxy', 1) // trust first proxy
+//     sess.cookie.secure = true // serve secure cookies
+// }
+if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
