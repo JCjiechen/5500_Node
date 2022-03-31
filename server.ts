@@ -35,13 +35,13 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 const dbUrl = "mongodb+srv://Jie:cj123456@cluster0.ozzi2.mongodb.net/tuiter?retryWrites=true&w=majority";
 mongoose.connect(dbUrl).then(() => {
     console.log("DB is connected");
-    console.log('ENVIRONMENT: ' + process.env.ENVIRONMENT);
 })
 
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: process.env.CORS_ORIGIN
+    //origin: process.env.CORS_ORIGIN
+    origin: ["http://localhost:3000", 'https://grand-torte-fb0054.netlify.app']
 }));
 
 const SECRET = 'process.env.EXPRESS_SESSION_SECRET';
