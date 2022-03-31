@@ -15,6 +15,7 @@ import CourseController from "./controllers/CourseController";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
+import DislikeController from "./controllers/DislikeController";
 import SessionController from "./controllers/SessionController";
 import AuthenticationController from "./controllers/AuthenticationController";
 import mongoose from "mongoose";
@@ -39,22 +40,27 @@ mongoose.connect(dbUrl).then(() => {
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:3000'
+    //origin: process.env.CORS_ORIGIN
+    origin: ["http://localhost:3000", 'https://grand-torte-fb0054.netlify.app']
 }));
 
-const SECRET = 'process.env.SECRET';
+const SECRET = 'process.env.EXPRESS_SESSION_SECRET';
 let sess = {
     secret: SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
 }
 
-if (process.env.ENVIRONMENT === 'PRODUCTION') {
+// if (process.env.ENVIRONMENT === 'PRODUCTION') {
+//     app.set('trust proxy', 1) // trust first proxy
+//     sess.cookie.secure = true // serve secure cookies
+// }
+if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
@@ -71,6 +77,7 @@ const courseController = new CourseController(app);
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
 const likesController = LikeController.getInstance(app);
+const dislikesController = DislikeController.getInstance(app);
 SessionController(app);
 AuthenticationController(app);
 GroupController(app);
