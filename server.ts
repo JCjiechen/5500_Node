@@ -35,6 +35,7 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 const dbUrl = "mongodb+srv://Jie:cj123456@cluster0.ozzi2.mongodb.net/tuiter?retryWrites=true&w=majority";
 mongoose.connect(dbUrl).then(() => {
     console.log("DB is connected");
+    console.log('ENVIRONMENT: ' + process.env.ENVIRONMENT);
 })
 
 const app = express();
@@ -43,8 +44,9 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN
 }));
 
+const SECRET = 'process.env.EXPRESS_SESSION_SECRET';
 let sess = {
-    secret: process.env.EXPRESS_SESSION_SECRET,
+    secret: SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
