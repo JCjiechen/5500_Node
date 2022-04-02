@@ -100,6 +100,7 @@ export default class LikeController implements LikeControllerI {
 
         if (uid === 'me' && !profile) {
             res.sendStatus(403);
+            return
         }
 
         const userId = uid === "me" && profile ?
@@ -130,6 +131,7 @@ export default class LikeController implements LikeControllerI {
         const profile = req.session['profile'];
         if (uid === 'me' && !profile) {
             res.sendStatus(403);
+            return
         }
 
         const userId = uid === 'me' && profile ?
