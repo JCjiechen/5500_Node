@@ -41,7 +41,7 @@ const app = express();
 app.use(cors({
     credentials: true,
     //origin: process.env.CORS_ORIGIN
-    origin: ["http://localhost:3000", 'https://grand-torte-fb0054.netlify.app']
+    origin: ["http://localhost:3000", 'https://lively-sable-8a5232.netlify.app']
 }));
 
 const SECRET = 'process.env.EXPRESS_SESSION_SECRET';
