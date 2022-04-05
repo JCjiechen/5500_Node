@@ -1,16 +1,13 @@
-/**
- * @file Declares Tuit data type.
- */
 import User from "../users/User";
+import Stats from "./Stats";
 
- /**
-  * @typedef Tuit Represents tuit data type.
-  * @property {string} tuit tuit
-  * @property {User} postedBy User post the tuit
-  * @property {Date} postedOn date post the tuit
-  */
 export default interface Tuit {
     tuit: string,
     postedBy: User,
     postedOn?: Date,
+    image?: String,
+    youtube?: String,
+    avatarLogo?: String,
+    imageOverlay?: String,
+    stats: Stats
 };
